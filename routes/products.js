@@ -1,20 +1,19 @@
-const router=require('express').Router()
+const route = require('express').Router()
+const {Product} = require('../db/models')
 
-const {Product}=require('../db/models');
-
-router.get('/',(req,res)=>{
+route.get('/', (req, res) => {
     Product.findAll()
-        .then((products)=>{ res.json(products)})
-        .catch((err)=>{ res.send(err.message)})
+        .then(products => res.json(products))
+        .catch((err) => res.send(err.message))
 })
 
-router.post('/',(req,res)=>{
+route.post('/', (req, res) => {
     Product.create({
         name: req.body.name,
-        price:req.body.price
+        price: req.body.price
     })
-        .then((createProducts)=>{ res.json(createProducts)})
-        .catch((err)=>{ res.send(err.message)})
+        .then((createdProduct) => res.json(createdProduct))
+        .catch((err) => res.send(err.message))
 })
 
-module.exports=router
+module.exports = route

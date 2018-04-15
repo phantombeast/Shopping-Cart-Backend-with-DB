@@ -19,10 +19,23 @@ const Product=db.define('product', {
         type: Sequelize.DataTypes.FLOAT
     }
 
-})
+});
+
+const User = db.define('user', {
+    username: {
+        type: Sequelize.DataTypes.STRING(25),
+        unique: true,
+        allowNull: false,
+    },
+    password: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+    }
+});
+
 db.sync().then(()=>{ console.log('DB ready')});
 
 
 module.exports={
-    Product
+    Product,User
 }
