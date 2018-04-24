@@ -11,7 +11,9 @@ app.use(session({
     secret: 'something that should not be shared',
     resave: false,
     saveUninitialized: true
-}))
+}));
+
+
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -21,10 +23,16 @@ app.set('view engine', 'hbs')
 app.use('/', express.static(path.join(__dirname, 'public')))
 
 // Routes
-app.use('/products', require('./routes/products'))
-app.use('/signin', require('./routes/signin'))
-app.use('/signup', require('./routes/signup'))
-app.use('/myaccount', require('./routes/myaccount'))
+app.use('/products', require('./routes/products'));
+app.use('/signin', require('./routes/signin'));
+app.use('/signup', require('./routes/signup'));
+app.use('/myaccount', require('./routes/myaccount'));
+app.use('/cart', require('./routes/cart'));
+
+app.get('/logout', (req,res)=>{
+    req.logout();
+    res.redirect('/');
+})
 
 app.listen(9898, function () {
     console.log("Server started on http://localhost:9898");

@@ -11,10 +11,10 @@ route.post('/',
         {failureRedirect: '/signin'}
     ),
     (req, res) => {
-        res.send(req.user)
+       res.redirect('/myaccount')
     }
 
 )
 
 
-module.exports = route
+module.exports = route;

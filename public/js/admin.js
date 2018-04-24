@@ -10,23 +10,23 @@ $(function () {
           <td>${product.price}</td>
         </tr>`
             )
-        }
-
     }
 
-    getProducts(refreshProducts)
-    $('#product-add-form-container').hide()
+}
 
-    $('#product-edit-toggle').click(function () {
-        $('#product-add-form-container').toggle()
-    })
+getProducts(refreshProducts)
+$('#product-add-form-container').hide()
+
+$('#product-edit-toggle').click(function () {
+    $('#product-add-form-container').toggle()
+})
 
 
-    $('#product-submit').click(function (e) {
-        e.preventDefault()
-        postProduct({
-            name: $('#product-name').val(),
-            price: $('#product-price').val()
-        }, refreshProducts)
+$('#product-submit').click(function (e) {
+    e.preventDefault()
+    postProduct({
+        name: $('#product-name').val(),
+        price: $('#product-price').val()
+    }, refreshProducts)
     })
 })

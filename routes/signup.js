@@ -26,6 +26,8 @@ route.post('/', (req, res) => {
         )
     })
 
+    // $.get(myacc/status)
+
 
 })
 

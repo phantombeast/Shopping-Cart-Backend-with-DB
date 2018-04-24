@@ -2,10 +2,12 @@ const route = require('express').Router()
 
 route.get('/', (req, res) => {
     if (!req.user) {
-        return res.send("Unauthorized")
+        return res.redirect('/signin')
     }
 
-    res.send(req.user)
-})
+    res.render('myaccount', {user:req.user})
+});
 
-module.exports = route
+route.get('/status', (req,res)=>{res.send({status: !! req.user})});
+
+module.exports = route;

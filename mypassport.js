@@ -42,4 +42,5 @@ passport.use(new LocalStrategy((username, password, done) => {
     }).catch(err => done(err))
 }))
 
+//module.exports = passport
 module.exports = passport

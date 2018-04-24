@@ -13,7 +13,46 @@ function postProduct(product, done) {
     })
 }
 
-$(function () {
+function checkLoginStatus(done) {
+    $.get('/myaccount/status', (data) => {
+        done(data.status)
+    })
+}
+
+function getCart (done) {
+    $.get('/cart', (data) => {
+        let savedcart = {}
+        for (item of data) {
+            savedcart[''+item.productId] = item.qty
+        }
+        done(savedcart)
+    })
+}
+
+function addNavBar (login) {
+    let navBarButtons
+    if (!login) {
+        navBarButtons = `
+            <li class="nav-item">
+                <a class="nav-link" href="/signin">
+                    Signin
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/signup">
+                    Signup
+                </a>
+            </li>
+    `
+    } else {
+        navBarButtons = `
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                    Logout
+                </a>
+            </li>
+    `
+    }
     $('body').prepend(
         `
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,19 +74,14 @@ $(function () {
                     Admin
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/signin">
-                    Signin
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/signup">
-                    Signup
-                </a>
-            </li>
+            ` + navBarButtons + `
         </ul>
     </div>
 </nav>
     `
     )
+}
+
+$(function () {
+    checkLoginStatus(addNavBar)
 })
